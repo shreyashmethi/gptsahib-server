@@ -14,12 +14,13 @@ dotenv.config({
 })
 
 const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-    exposedHeaders: [],
-    maxAge: 3600,
+    origin: 'https://www.gptsahib.com', // Allow requests from specific origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // Allow credentials (e.g., cookies)   
+
+    exposedHeaders: [], // Exposed headers (if any)
+    maxAge: 3600, // Cache preflight request for an hour
 };
 
 app.use(cors(corsOptions));
