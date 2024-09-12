@@ -116,7 +116,7 @@ const checkStatus = async (req, res) => {
           paymentInstrument: response.data.data.paymentInstrument,
           userId: userId,
         });
-        const url = `https://gptsahib.com/success?transactionId=${response.data.data.transactionId}&date=${response.data.data.transactionDate}`;
+        const url = `https://gptsahib.com/success?transactionId=${response.data.data.transactionId}&date=${response.data.data.paymentInstrument.transactionDate}`;
         return res.redirect(url);
       } else {
         const url = "https://gptsahib.com/failure";
