@@ -18,6 +18,8 @@ const helper = async (req, res) => {
     userId = req.body.userId;
     return res.status(200).json({ data: response.data });
   } catch (error) {
+    console.log(error, 123);
+
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -32,8 +34,8 @@ const newPayment = async (req, res) => {
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
       userId: req.res.req.body.userId,
-      redirectUrl: `http://gptsahib.com`,
-      callbackUrl: `http://gptsahib.com`,
+      redirectUrl: `https://gptsahib.com`,
+      callbackUrl: `https://gptsahib.com`,
       redirectMode: "POST",
       paymentInstrument: {
         type: "PAY_PAGE",
