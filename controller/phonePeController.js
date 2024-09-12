@@ -34,8 +34,8 @@ const newPayment = async (req, res) => {
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
       userId: req.res.req.body.userId,
-      redirectUrl: `gptsahib.com`,
-      callbackUrl: `gptsahib.com`,
+      redirectUrl: `http://www.gptsahib.com`,
+      callbackUrl: `http://www.gptsahib.com`,
       redirectMode: "POST",
       paymentInstrument: {
         type: "PAY_PAGE",
@@ -118,15 +118,23 @@ const checkStatus = async (req, res) => {
           paymentInstrument: response.data.data.paymentInstrument,
           userId: userId,
         });
-        return res.status(200).json({
-          status: "Success",
-          message: "Payment has been completed !",
-          response: response.data,
-        });
+        const url = "https://gptsahib.com/success";
+        console.log(response.data);
+        
+        return res.redirect(url);
+        // return res.status(200).json({
+        //   status: "Success",
+        //   message: "Payment has been completed !",
+        //   response: response.data,
+        // });
       } else {
-        return res
-          .status(200)
-          .json({ status: "Error", message: "Payment has failed !" });
+        // return res
+        //   .status(200)
+        //   .json({ status: "Error", message: "Payment has failed !" });
+        console.log(response.data);
+        
+        const url = "https://gptsahib.com/failure";
+        return res.redirect(url);
       }
     })
     .catch((error) => {
