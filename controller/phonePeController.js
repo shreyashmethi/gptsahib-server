@@ -34,8 +34,8 @@ const newPayment = async (req, res) => {
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
       userId: req.res.req.body.userId,
-      redirectUrl: `https://www.gptsahib.com`,
-      callbackUrl: `https://www.gptsahib.com`,
+      redirectUrl: `http://www.gptsahib.com`,
+      callbackUrl: `http://www.gptsahib.com`,
       redirectMode: "POST",
       paymentInstrument: {
         type: "PAY_PAGE",
