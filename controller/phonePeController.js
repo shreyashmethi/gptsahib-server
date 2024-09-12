@@ -7,7 +7,7 @@ let userId = "";
 const helper = async (req, res) => {
   try {
     const response = await axios.post(
-      `http://localhost:8000/api/payment/payment`,
+      `https://gptsahib-server-1050062966711.us-central1.run.app/api/payment/payment`,
       {
         amount: req.body.amount,
         MUID: `MUID${Date.now()}`,
@@ -32,8 +32,8 @@ const newPayment = async (req, res) => {
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
       userId: req.res.req.body.userId,
-      redirectUrl: `http://localhost:3000`, // you can replace it with some success screen ! (in frontend)
-      callbackUrl: `http://localhost:3000`, // you can replace it with some success screen ! (in frontend)
+      redirectUrl: `http://gptsahib.com`,
+      callbackUrl: `http://gptsahib.com`,
       redirectMode: "POST",
       paymentInstrument: {
         type: "PAY_PAGE",
