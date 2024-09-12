@@ -105,8 +105,6 @@ const checkStatus = async (req, res) => {
     .request(options)
     .then(async (response) => {
       if (response.data.success === true) {
-        console.log(response.data.data);
-        console.log(userId);
 
         await Transaction.create({
           merchantId: response.data.data.merchantId,
@@ -118,21 +116,9 @@ const checkStatus = async (req, res) => {
           paymentInstrument: response.data.data.paymentInstrument,
           userId: userId,
         });
-        const url = `https://gptsahib.com/success?transactionId=${response.data.data.transactionId}&date=${response.data}`;
-        console.log(response.data);
-        
+        const url = `https://gptsahib.com/success?transactionId=${response.data.data.transactionId}&date=${response.data.data.transactionDate}`;
         return res.redirect(url);
-        // return res.status(200).json({
-        //   status: "Success",
-        //   message: "Payment has been completed !",
-        //   response: response.data,
-        // });
       } else {
-        // return res
-        //   .status(200)
-        //   .json({ status: "Error", message: "Payment has failed !" });
-        console.log(response.data);
-        
         const url = "https://gptsahib.com/failure";
         return res.redirect(url);
       }
