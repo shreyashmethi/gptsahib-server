@@ -29,7 +29,7 @@ const newPayment = async (req, res) => {
   try {
     const merchantTransactionId = req.res.req.body.transactionId;
     const data = {
-      merchantId: "PGTESTPAYUAT86", //change it to original one
+      merchantId: "M22SF30B41PAJ", //change it to original one
       merchantTransactionId: merchantTransactionId,
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
@@ -45,12 +45,12 @@ const newPayment = async (req, res) => {
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
     const string =
-      payloadMain + "/pg/v1/pay" + "96434309-7796-489d-8924-ab56988a6076";
+      payloadMain + "/pg/v1/pay" + "16d474c5-690c-4c35-b0b6-ca9ed8d7f37b";
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
     const options = {
       method: "POST",
-      url: "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay", //change it to original one
+      url: "https://api.phonepe.com/apis/hermes/pg/v1/pay", //change it to original one
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
@@ -86,13 +86,13 @@ const checkStatus = async (req, res) => {
   const keyIndex = 1;
   const string =
     `/pg/v1/status/${merchantId}/${merchantTransactionId}` +
-    "96434309-7796-489d-8924-ab56988a6076";
+    "16d474c5-690c-4c35-b0b6-ca9ed8d7f37b";
   const sha256 = crypto.createHash("sha256").update(string).digest("hex");
   const checksum = sha256 + "###" + keyIndex;
 
   const options = {
     method: "GET",
-    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`, //change it to original one
+    url: `https://api.phonepe.com/apis/hermes/pg/v1/status/${merchantId}/${merchantTransactionId}`, //change it to original one
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
@@ -105,7 +105,6 @@ const checkStatus = async (req, res) => {
     .request(options)
     .then(async (response) => {
       if (response.data.success === true) {
-
         await Transaction.create({
           merchantId: response.data.data.merchantId,
           merchantTransactionId: response.data.data.merchantTransactionId,
