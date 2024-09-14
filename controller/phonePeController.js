@@ -29,7 +29,7 @@ const newPayment = async (req, res) => {
   try {
     const merchantTransactionId = req.res.req.body.transactionId;
     const data = {
-      merchantId: "M22SF30B41PAJ", //changed to original one
+      merchantId: "PGTESTPAYUAT86", //change it to original one
       merchantTransactionId: merchantTransactionId,
       merchantUserId: req.res.req.body.MUID,
       amount: req.res.req.body.amount * 100,
@@ -50,7 +50,7 @@ const newPayment = async (req, res) => {
     const checksum = sha256 + "###" + keyIndex;
     const options = {
       method: "POST",
-      url: "https://api.phonepe.com/apis/hermes/pg/v1/pay", //changed to original one
+      url: "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay", //change it to original one
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const checkStatus = async (req, res) => {
 
   const options = {
     method: "GET",
-    url: `https://api.phonepe.com/apis/hermes/pg/v1/status/${merchantId}/${merchantTransactionId}`, //changed to original one
+    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`, //change it to original one
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
@@ -105,6 +105,7 @@ const checkStatus = async (req, res) => {
     .request(options)
     .then(async (response) => {
       if (response.data.success === true) {
+
         await Transaction.create({
           merchantId: response.data.data.merchantId,
           merchantTransactionId: response.data.data.merchantTransactionId,
